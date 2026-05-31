@@ -1,0 +1,15 @@
+apiVersion: platform.example.org/v1alpha1
+kind: ApplicationClaim
+metadata:
+  name: e2e32478
+  namespace: default
+  annotations:
+    webservice.oam.dev/source: "api-driven"
+    webservice.oam.dev/processed-by: "host-cluster-composition"
+spec:
+  appContainer: e2e32478
+  name: e2e32478
+  language: python
+  framework: fastapi
+  database: postgres
+  cache: none

@@ -1,0 +1,28 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: e2e32478-app
+  namespace: default
+spec:
+  components:
+  - name: e2e32478
+    type: webservice
+    properties:
+      image: "healthidpuaeacr.azurecr.io/e2e32478:v1.0.0"
+      port: 8080
+      healthPath: "/health"
+      language: python
+      framework: fastapi
+      database: postgres
+      envFrom:
+      - secretRef:
+          name: "e2e32478-db-secret"
+      environment:
+        LOG_LEVEL: "INFO"
+        AGENT_TYPE: "e2e32478"
+  policies:
+  - name: deploy-to-vcluster
+    type: topology
+    properties:
+      clusters: ["host"]
+      namespace: "default"

@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: e2e32478
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/shlapolosa/e2e32478-gitops
+    targetRevision: main
+    path: vcluster/host/applications/e2e32478
+    directory:
+      include: '{application-claim.yaml,oam-application.yaml}'
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
